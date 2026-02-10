@@ -25,6 +25,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Ham Jam"
 
+[global_group]
+
+Child=""
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dmkgoe8qtoxgy"]
+
+[ext_resource type="Texture2D" uid="uid://bkukw58b55nrv" path="res://Entities/Sprites/Protoype-man.png" id="1_rsm2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vvqae"]
+size = Vector2(15, 18)
+
+[node name="Human" type="CharacterBody2D" unique_id=267994672]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=531116413]
+shape = SubResource("RectangleShape2D_vvqae")
+
+[node name="ProtoypeMan" type="Sprite2D" parent="." unique_id=1850609628]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_rsm2v")
