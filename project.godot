@@ -11,8 +11,15 @@ config_version=5
 [application]
 
 config/name="Ham Jam"
+run/main_scene="uid://bpwosgp2xa1vf"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=384
+window/size/viewport_height=216
+window/stretch/mode="viewport"
 
 [dotnet]
 
@@ -24,4 +31,5 @@ project/assembly_name="Ham Jam"
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
