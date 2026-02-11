@@ -9,7 +9,6 @@ radius = 8.0
 radius = 8.0
 
 [node name="Child" type="RigidBody2D" unique_id=403796794]
-collision_layer = 0
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1239836368]

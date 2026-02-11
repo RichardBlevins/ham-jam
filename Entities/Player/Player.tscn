@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://kalqjbqpkiwi" path="res://Entities/Player/Player.cs" id="1_3qydi"]
 [ext_resource type="Texture2D" uid="uid://cetfpevyuejiy" path="res://Entities/Sprites/Joshua.png" id="2_q3lat"]
-[ext_resource type="Script" uid="uid://dwfyib1q2vkyf" path="res://Entities/Boilerplate Scripts/Rope.cs" id="3_vweq0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2ndj"]
 size = Vector2(12, 6)
@@ -21,18 +20,16 @@ shape = SubResource("RectangleShape2D_l2ndj")
 texture = ExtResource("2_q3lat")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=2099997409]
+position = Vector2(1, 0)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1536566132]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=395613474]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_l2ndj")
-
-[node name="Rope" type="Line2D" parent="." unique_id=47303346 node_paths=PackedStringArray("StartNode")]
-script = ExtResource("3_vweq0")
-StartNode = NodePath("..")
-Slack = 5.0
 
 [node name="Roperadius" type="Area2D" parent="." unique_id=970781390]
 

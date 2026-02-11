@@ -28,47 +28,36 @@ public partial class Player : CharacterBody2D
 		
 	}
 	
+
+
+	
 	private void PlayerInteractEvent()
 	{
-		Area2D hitbox = GetNode<Area2D>("Hitbox");
-
-		foreach (Area2D area in hitbox.GetOverlappingAreas())
-		{
-			//creates a list of the groups the area is in
-			Godot.Collections.Array<StringName> groups = area.GetGroups();
-			
-			// sets a varible for all the groups in the array
-			foreach (StringName group in groups)
-			{
-				switch (group.ToString())
-				
-				{
-					case "Enemy": 
-						break;
-				}
-			}
-		}
+//		Rope rope = GetNode<Rope>("Rope");
+//		bool spaceJustPressed = Input.IsActionJustPressed("ui_accept");
+//		
+		// Toggle detach if already attached
+//	//	if (spaceJustPressed && rope.IsAttached)
+	//	{
+	//		rope.Detach();
+	//		return;
+	//	}
 		
-		Area2D  roperadius = GetNode<Area2D>("Roperadius");
-
-		foreach (Area2D area in roperadius.GetOverlappingAreas())
-		{
-			Godot.Collections.Array<StringName> groups = area.GetGroups();
-
-			foreach (StringName group in groups)
-			{
-				switch (group.ToString())
-				{
-					case "Child":
-						if (Input.IsActionPressed("ui_accept"))
-						{
-							Rope rope = GetNode<Rope>("Rope");
-							rope.EndNode = area;
-						}
-						break;
-				}
-			}
-		}
+		// Try to attach to nearby RigidBody2D
+//		if (spaceJustPressed)
+//		{
+//			Area2D roperadius = GetNode<Area2D>("Roperadius");
+//
+//			foreach (Node2D body in roperadius.GetOverlappingBodies())
+//			{
+//	
+//				if (body is RigidBody2D rigidBody && body != this)
+//				{
+					
+//					break;
+//				}
+//			}
+//		}
 	}
 	
 }
