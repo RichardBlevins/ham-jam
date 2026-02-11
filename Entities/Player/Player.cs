@@ -43,10 +43,27 @@ public partial class Player : CharacterBody2D
 				switch (group.ToString())
 				
 				{
+					case "Enemy": 
+						break;
+				}
+			}
+		}
+		
+		Area2D  roperadius = GetNode<Area2D>("Roperadius");
+
+		foreach (Area2D area in roperadius.GetOverlappingAreas())
+		{
+			Godot.Collections.Array<StringName> groups = area.GetGroups();
+
+			foreach (StringName group in groups)
+			{
+				switch (group.ToString())
+				{
 					case "Child":
-						if (Input.IsActionJustPressed("ui_accept"))
+						if (Input.IsActionPressed("ui_accept"))
 						{
-							
+							Rope rope = GetNode<Rope>("Rope");
+							rope.EndNode = area;
 						}
 						break;
 				}

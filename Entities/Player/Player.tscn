@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://kalqjbqpkiwi" path="res://Entities/Player/Player.cs" id="1_3qydi"]
 [ext_resource type="Texture2D" uid="uid://cetfpevyuejiy" path="res://Entities/Sprites/Joshua.png" id="2_q3lat"]
+[ext_resource type="Script" uid="uid://dwfyib1q2vkyf" path="res://Entities/Boilerplate Scripts/Rope.cs" id="3_vweq0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2ndj"]
 size = Vector2(12, 6)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ww0jn"]
-radius = 11.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_vweq0"]
+radius = 19.0
 
 [node name="Player" type="CharacterBody2D" unique_id=735846894]
 script = ExtResource("1_3qydi")
@@ -24,7 +25,16 @@ position_smoothing_enabled = true
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1536566132]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1582981180]
-shape = SubResource("CircleShape2D_ww0jn")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=395613474]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_l2ndj")
 
-[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[node name="Rope" type="Line2D" parent="." unique_id=47303346 node_paths=PackedStringArray("StartNode")]
+script = ExtResource("3_vweq0")
+StartNode = NodePath("..")
+Slack = 5.0
+
+[node name="Roperadius" type="Area2D" parent="." unique_id=970781390]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Roperadius" unique_id=558583108]
+shape = SubResource("CircleShape2D_vweq0")
