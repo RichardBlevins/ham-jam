@@ -10,6 +10,9 @@ script = ExtResource("1_2kdju")
 
 [node name="RopeStart" parent="." unique_id=227156837 instance=ExtResource("1_07t2u")]
 position = Vector2(153, 69)
+gravity_scale = 2.0
+freeze = true
 
 [node name="RopeEnd" parent="." unique_id=152638096 instance=ExtResource("1_07t2u")]
-position = Vector2(383, 75)
+position = Vector2(363, 49)
+gravity_scale = 2.0
