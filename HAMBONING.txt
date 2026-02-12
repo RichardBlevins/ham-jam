@@ -5,4 +5,14 @@ make the meat grinder
 add the ability to grab kidss
 
 
-https://www.youtube.com/watch?v=eIdtvD47I0o Rope tutorial 7:40
+
+
+
+
+MAKE HIM ONK AND ATTRaCt KIDS AND THEn Lure thEM TO MEAT GRINDER 
+
+
+Make an oink cool down
+
+make an eating state slows the players speed by -25 and humans will chase after you and
+running state ads 50 to speed

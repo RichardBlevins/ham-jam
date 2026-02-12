@@ -1,23 +1,17 @@
 [gd_scene format=3 uid="uid://dx4etwqw2sq0i"]
 
+[ext_resource type="Script" uid="uid://bt24d8tt1qnfa" path="res://Entities/Child/Child.cs" id="1_iwe1b"]
 [ext_resource type="Texture2D" uid="uid://5604ydgpp2ib" path="res://Entities/Sprites/Protoype-chars.png" id="1_wpwy3"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_iwe1b"]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwe1b"]
+size = Vector2(14, 14)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vtocw"]
-radius = 8.0
-
-[node name="Child" type="RigidBody2D" unique_id=403796794]
+[node name="Child" type="RigidBody2D" unique_id=403796794 groups=["Child"]]
 gravity_scale = 0.0
+script = ExtResource("1_iwe1b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1239836368]
-shape = SubResource("CircleShape2D_iwe1b")
+shape = SubResource("RectangleShape2D_iwe1b")
 
 [node name="PrototypeChild" type="Sprite2D" parent="." unique_id=588587562]
 texture = ExtResource("1_wpwy3")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=1166450897 groups=["Child"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1640996465]
-shape = SubResource("CircleShape2D_vtocw")

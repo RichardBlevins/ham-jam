@@ -7,7 +7,10 @@
 size = Vector2(12, 6)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vweq0"]
-radius = 19.0
+radius = 85.2115
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ww0jn"]
+radius = 13.0
 
 [node name="Player" type="CharacterBody2D" unique_id=735846894]
 script = ExtResource("1_3qydi")
@@ -31,7 +34,12 @@ position_smoothing_speed = 10.0
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_l2ndj")
 
-[node name="Roperadius" type="Area2D" parent="." unique_id=970781390]
+[node name="OinkRadius" type="Area2D" parent="." unique_id=970781390]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Roperadius" unique_id=558583108]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OinkRadius" unique_id=558583108]
 shape = SubResource("CircleShape2D_vweq0")
+
+[node name="EatRadius" type="Area2D" parent="." unique_id=1478867116]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EatRadius" unique_id=875510276]
+shape = SubResource("CircleShape2D_ww0jn")
