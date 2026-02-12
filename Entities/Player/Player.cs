@@ -37,10 +37,7 @@ public partial class Player : CharacterBody2D
 
 		Velocity = velocity;
 		
-		StateMachine();
-		PlayerOinkEvent();
-		MoveAndSlide();
-		
+
 		if (eatTimer > 0)
 		{
 			eatTimer -= (float)delta;
@@ -48,11 +45,16 @@ public partial class Player : CharacterBody2D
 			if (eatTimer <= 0)
 			{
 				currentState = PlayerState.WALKING;
-				GD.Print(currentState);
 			}
-			
-			currentState = PlayerState.EATING;
+			else
+			{
+				currentState = PlayerState.EATING;
+			}
 		}
+		StateMachine();
+		PlayerOinkEvent();
+		MoveAndSlide();
+		GD.Print(currentState);
 
 	}
 
