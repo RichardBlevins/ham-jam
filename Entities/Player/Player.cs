@@ -17,6 +17,7 @@ public partial class Player : CharacterBody2D
 	public float WalkingSpeed = 75.0f;
 	public float RunningSpeed = 125.0f;
 	public float EatingSpeed = 45.0f;
+	private float eatTimer = 0f;
 
 	public override void _Ready()
 	{
@@ -35,10 +36,23 @@ public partial class Player : CharacterBody2D
 		}
 
 		Velocity = velocity;
-
+		
 		StateMachine();
 		PlayerOinkEvent();
 		MoveAndSlide();
+		
+		if (eatTimer > 0)
+		{
+			eatTimer -= (float)delta;
+
+			if (eatTimer <= 0)
+			{
+				currentState = PlayerState.WALKING;
+				GD.Print(currentState);
+			}
+			
+			currentState = PlayerState.EATING;
+		}
 
 	}
 
@@ -69,14 +83,17 @@ public partial class Player : CharacterBody2D
 				if (body is RigidBody2D rigidBody && body != this && body.IsInGroup("Child") && currentState != PlayerState.EATING)
 				{
 					body.QueueFree();
-					currentState = PlayerState.EATING;
+					Eating(3.0f);
 					break;
 				}
 			}	
 		}
 
 	}
-
+	public void Eating(float duration)
+	{
+		eatTimer = duration;
+	}
 	private void StateMachine()
 	{
 		switch (currentState)
