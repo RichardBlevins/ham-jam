@@ -8,6 +8,7 @@ size = Vector2(14, 14)
 
 [node name="Child" type="RigidBody2D" unique_id=403796794 groups=["Child"]]
 gravity_scale = 0.0
+linear_damp = 2.0
 script = ExtResource("1_iwe1b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1239836368]

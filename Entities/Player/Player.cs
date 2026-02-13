@@ -8,21 +8,27 @@ public partial class Player : CharacterBody2D
 	{
 		WALKING,
 		EATING,
-		RUNNING
+		RUNNING,
+		IDLE
 	}
 	
-	PlayerState currentState = PlayerState.WALKING;
+	PlayerState currentState = PlayerState.IDLE;
 	
 	[Export] public float Speed;
 	public float WalkingSpeed = 75.0f;
 	public float RunningSpeed = 125.0f;
 	public float EatingSpeed = 45.0f;
 	private float eatTimer = 0f;
+	private AnimationPlayer _animationPLayer;
+	private Sprite2D _joshua;
+	private int facingDirection = 1; // 1 for right, -1 for left
+
 
 	public override void _Ready()
 	{
 		base._Ready();
-		GD.Print("Player ready");
+		_animationPLayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_joshua = GetNode<Sprite2D>("Joshua"); // Adjust path if needed
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -32,12 +38,25 @@ public partial class Player : CharacterBody2D
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		if (direction != Vector2.Zero) // checks if the players velocity is not zero and moves the player if true
 		{
+			if (direction.X < 0 && facingDirection != 1)
+			{
+				facingDirection = 1;
+				_joshua.FlipH = false; // Facing right
+			}
+			else if (direction.X > 0 && facingDirection != -1)
+			{
+				facingDirection = -1;
+				_joshua.FlipH = true; // Facing left (flipped)
+			}
+			currentState = PlayerState.WALKING;
 			velocity = direction.Normalized() * Speed;
-		}
+		} else {currentState = PlayerState.IDLE;}
+		
 
 		Velocity = velocity;
 		
 
+		//=============================== EAT COOLDOWN
 		if (eatTimer > 0)
 		{
 			eatTimer -= (float)delta;
@@ -51,10 +70,12 @@ public partial class Player : CharacterBody2D
 				currentState = PlayerState.EATING;
 			}
 		}
+		//=========================================
+
+
 		StateMachine();
 		PlayerOinkEvent();
 		MoveAndSlide();
-		GD.Print(currentState);
 
 	}
 
@@ -106,10 +127,16 @@ public partial class Player : CharacterBody2D
 			
 			case PlayerState.WALKING:
 				Speed = WalkingSpeed;
+				_animationPLayer.Play("Walk");
 				break;
 			
 			case PlayerState.RUNNING:
 				Speed = RunningSpeed;
+				break;
+
+			case PlayerState.IDLE:
+				Speed = WalkingSpeed;
+				_animationPLayer.Play("Idle");
 				break;
 		}
 	}
