@@ -16,3 +16,15 @@ Make an oink cool down
 
 make an eating state slows the players speed by -25 and humans will chase after you and
 running state ads 50 to speed
+
+
+
+make enemie ai
+
+make look radius
+make hear radius warning and walk to go investigate
+
+
+make child ai
+
+make proceedural generation???

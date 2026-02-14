@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using Godot.Collections;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody2D
 {
@@ -11,15 +12,23 @@ public partial class Player : CharacterBody2D
 		RUNNING,
 		IDLE
 	}
-	
+
+	private RandomNumberGenerator _rng = new RandomNumberGenerator();
+	private List<Action> _oinks;
+
+
 	PlayerState currentState = PlayerState.IDLE;
-	
+
+
 	[Export] public float Speed;
 	public float WalkingSpeed = 75.0f;
 	public float RunningSpeed = 125.0f;
 	public float EatingSpeed = 45.0f;
 	private float eatTimer = 0f;
+
+
 	private AnimationPlayer _animationPLayer;
+	private AudioStreamPlayer2D _walk;
 	private Sprite2D _joshua;
 	private int facingDirection = 1; // 1 for right, -1 for left
 
@@ -29,6 +38,32 @@ public partial class Player : CharacterBody2D
 		base._Ready();
 		_animationPLayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_joshua = GetNode<Sprite2D>("Joshua"); // Adjust path if needed
+		_walk = GetNode<AudioStreamPlayer2D>("Walk");
+
+		_rng.Randomize();
+
+		_oinks = new List<Action> {
+			
+			// lambda "() =>" this essentially creates a small function 
+			// thats not defined instead of making a whole new named function that will only have a line of code.???
+
+			() =>
+			{
+				var oink = GetNode<AudioStreamPlayer2D>("Oink");
+				oink.PitchScale = _rng.RandfRange(0.8f, 1.2f);
+				oink.Play();
+			},
+			() => {
+				var oink = GetNode<AudioStreamPlayer2D>("Oink");
+				oink.PitchScale = _rng.RandfRange(0.8f, 1.2f);
+				oink.Play();
+			},
+			() => {
+				var oink = GetNode<AudioStreamPlayer2D>("Oink");
+				oink.PitchScale = _rng.RandfRange(0.8f, 1.2f);
+				oink.Play();
+			}};
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -86,6 +121,8 @@ public partial class Player : CharacterBody2D
 
 		if (spaceJustPressed) //checks if that input is true then ...
 		{
+			OinkSoundEffect();
+			
 			Area2D oinkradius = GetNode<Area2D>("OinkRadius");  //get the oink radius node from the node tree
 			
 			foreach (Node2D body in oinkradius.GetOverlappingBodies()) // checks for any 2d nodes in the oinkradius
@@ -127,7 +164,10 @@ public partial class Player : CharacterBody2D
 			
 			case PlayerState.WALKING:
 				Speed = WalkingSpeed;
-				_animationPLayer.Play("Walk");
+				if (facingDirection == -1) {
+					_animationPLayer.PlayBackwards("Walk");
+				} else {_animationPLayer.Play("Walk");}
+					
 				break;
 			
 			case PlayerState.RUNNING:
@@ -139,5 +179,10 @@ public partial class Player : CharacterBody2D
 				_animationPLayer.Play("Idle");
 				break;
 		}
+	}
+	private void OinkSoundEffect() {
+
+	int index = _rng.RandiRange(0, _oinks.Count - 1); 
+	_oinks[index].Invoke();
 	}
 }
