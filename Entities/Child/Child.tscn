@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://5604ydgpp2ib" path="res://Entities/Sprites/Protoype-chars.png" id="1_wpwy3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iwe1b"]
-size = Vector2(7.75, 8)
+size = Vector2(8.96875, 10.5)
 
 [node name="Child" type="RigidBody2D" unique_id=403796794 groups=["Child"]]
 gravity_scale = 0.0
@@ -15,5 +15,4 @@ script = ExtResource("1_iwe1b")
 shape = SubResource("RectangleShape2D_iwe1b")
 
 [node name="PrototypeChild" type="Sprite2D" parent="." unique_id=588587562]
-scale = Vector2(0.8333333, 0.8333333)
 texture = ExtResource("1_wpwy3")

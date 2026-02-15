@@ -28,7 +28,6 @@ public partial class Player : CharacterBody2D
 
 
 	private AnimationPlayer _animationPLayer;
-	private AudioStreamPlayer2D _walk;
 	private Sprite2D _joshua;
 	private int facingDirection = 1; // 1 for right, -1 for left
 
@@ -38,7 +37,6 @@ public partial class Player : CharacterBody2D
 		base._Ready();
 		_animationPLayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_joshua = GetNode<Sprite2D>("Joshua"); // Adjust path if needed
-		_walk = GetNode<AudioStreamPlayer2D>("Walk");
 
 		_rng.Randomize();
 

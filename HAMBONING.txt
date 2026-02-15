@@ -27,4 +27,6 @@ make hear radius warning and walk to go investigate
 
 make child ai
 
-make proceedural generation???
+make proceedural generation??? <<<<<<
+
+make this more of a dungeon crawler game proveedural generated rooms
