@@ -136,6 +136,9 @@ sources/0 = SubResource("TileSetAtlasSource_mlekv")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6flb"]
 size = Vector2(302, 206)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0yrvx"]
+size = Vector2(16, 8)
+
 [node name="room" type="Area2D" unique_id=875123357 groups=["NRoom"]]
 z_index = -5
 
@@ -144,6 +147,11 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAI
 tile_set = SubResource("TileSet_il6x7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1485640062]
-visible = false
 position = Vector2(152, 103)
 shape = SubResource("RectangleShape2D_y6flb")
+
+[node name="+Y_Connector" type="Area2D" parent="." unique_id=1460379405]
+position = Vector2(152, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="+Y_Connector" unique_id=1869829827]
+shape = SubResource("RectangleShape2D_0yrvx")

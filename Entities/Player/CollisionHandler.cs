@@ -52,7 +52,7 @@ public partial class CollisionHandler : Node2D
 		}
 		bool eatPressed = Input.IsActionJustPressed("eat");
 		Area2D eatradius = GetNode<Area2D>("EatRadius");
-        
+
 		if (eatPressed)
 		{
 			foreach (Node body in eatradius.GetOverlappingBodies())

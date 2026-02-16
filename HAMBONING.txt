@@ -49,3 +49,15 @@ when room area enters players hitbox emit signal connected to the world to move 
 
 
 We have a start and an end. a tresure room. a special room with a hidden tresure and a miniboss.
+
+
+
+just get the room as a packed scene. 
+
+get all the open connectors in a list 
+
+if rooms is below max rooms.
+	create new room at random open connector
+elif rooms is above max rooms.
+	close all open connectors
+	

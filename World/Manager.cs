@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 public partial class Manager : Node
 {
 	public static Manager Instance { get; private set; }
+	
 
 	public override void _Ready()
 	{

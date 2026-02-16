@@ -12,6 +12,7 @@ script = ExtResource("1_mlekv")
 position = Vector2(137, 90)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=302748577]
+position = Vector2(1, 0)
 anchor_mode = 0
 zoom = Vector2(6.32, 5.2)
 

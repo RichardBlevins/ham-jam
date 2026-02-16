@@ -136,6 +136,12 @@ sources/0 = SubResource("TileSetAtlasSource_mlekv")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6flb"]
 size = Vector2(302, 206)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnaid"]
+size = Vector2(16, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxahf"]
+size = Vector2(8, 16)
+
 [node name="room0" type="Area2D" unique_id=875123357 groups=["NRoom"]]
 
 [node name="Floors-Walls" type="TileMapLayer" parent="." unique_id=1612511137]
@@ -144,6 +150,30 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAI
 tile_set = SubResource("TileSet_il6x7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1485640062]
-visible = false
 position = Vector2(152, 103)
 shape = SubResource("RectangleShape2D_y6flb")
+
+[node name="+Y_Connector" type="Area2D" parent="." unique_id=917958853]
+position = Vector2(152, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="+Y_Connector" unique_id=309300089]
+shape = SubResource("RectangleShape2D_dnaid")
+
+[node name="+X_Connector" type="Area2D" parent="." unique_id=1775589379]
+position = Vector2(312, 104)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="+X_Connector" unique_id=15191345]
+shape = SubResource("RectangleShape2D_bxahf")
+
+[node name="-X_Connector" type="Area2D" parent="." unique_id=454216544]
+position = Vector2(312, 104)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="-X_Connector" unique_id=58522514]
+position = Vector2(-320, 0)
+shape = SubResource("RectangleShape2D_bxahf")
+
+[node name="-Y_Connector" type="Area2D" parent="." unique_id=324959000]
+position = Vector2(152, 216)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="-Y_Connector" unique_id=1877742928]
+shape = SubResource("RectangleShape2D_dnaid")
