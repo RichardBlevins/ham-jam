@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cdiabwj15iuwq" path="res://Entities/Player/Player.tscn" id="1_y6flb"]
 [ext_resource type="PackedScene" uid="uid://dx4etwqw2sq0i" path="res://Entities/Child/Child.tscn" id="2_mlekv"]
 [ext_resource type="PackedScene" uid="uid://dmokxr8bacg3x" path="res://World/Rooms/starting_room.tscn" id="3_mlekv"]
+[ext_resource type="PackedScene" uid="uid://b6pyhdnxq6cnk" path="res://World/Rooms/room0.tscn" id="5_o14yy"]
 
 [node name="World" type="Node2D" unique_id=62717158]
 script = ExtResource("1_mlekv")
@@ -15,7 +16,12 @@ position = Vector2(137, 90)
 anchor_mode = 0
 zoom = Vector2(6.32, 5.2)
 
-[node name="Starting-Room" parent="." unique_id=875123357 instance=ExtResource("3_mlekv")]
-
 [node name="Child" parent="." unique_id=403796794 instance=ExtResource("2_mlekv")]
 position = Vector2(181, 54)
+
+[node name="Rooms" type="Node2D" parent="." unique_id=1153403481]
+
+[node name="Starting-Room" parent="Rooms" unique_id=875123357 instance=ExtResource("3_mlekv")]
+
+[node name="room0" parent="Rooms" unique_id=1486674777 instance=ExtResource("5_o14yy")]
+position = Vector2(0, -208)

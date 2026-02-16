@@ -32,7 +32,8 @@ project/assembly_name="Ham Jam"
 [global_group]
 
 Child=""
-oinks=""
+NRoom=""
+Oinks=""
 
 [input]
 

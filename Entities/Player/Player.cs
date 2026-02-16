@@ -1,7 +1,11 @@
 using Godot;
+using System;
 
 public partial class Player : CharacterBody2D
 {
+	[Signal]
+	public delegate void OnNormalRoomEnteredEventHandler(Vector2 cameraPosition);
+
 	public enum PlayerState
 	{
 		WALKING,

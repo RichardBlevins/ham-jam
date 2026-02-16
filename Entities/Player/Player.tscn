@@ -144,13 +144,13 @@ stream = ExtResource("3_t38ms")
 volume_db = 10.0
 pitch_scale = 0.8
 
-[node name="Oink" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=536357287 groups=["oinks"]]
+[node name="Oink" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=536357287 groups=["Oinks"]]
 stream = ExtResource("4_hj1c0")
 
-[node name="Oink2" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=1012435137 groups=["oinks"]]
+[node name="Oink2" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=1012435137 groups=["Oinks"]]
 stream = ExtResource("5_x44r4")
 
-[node name="Oink3" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=669118588 groups=["oinks"]]
+[node name="Oink3" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=669118588 groups=["Oinks"]]
 stream = ExtResource("6_761t5")
 
 [node name="CollisionHandler" type="Node2D" parent="." unique_id=464916267]
