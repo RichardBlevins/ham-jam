@@ -20,5 +20,6 @@ public partial class World : Node2D
     private void OnNormalRoomEntered(Vector2 cameraPosition)
     {
         camera2D.GlobalPosition = cameraPosition;
+        
     }
 }

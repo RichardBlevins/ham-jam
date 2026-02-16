@@ -23,7 +23,7 @@ public partial class CollisionHandler : Node2D
 
 		_oinks = new List<AudioStreamPlayer2D>();
 
-        foreach (Node node in GetTree().GetNodesInGroup("oinks"))
+        foreach (Node node in GetTree().GetNodesInGroup("Oinks"))
         {
             if (node is AudioStreamPlayer2D audio)
             {
@@ -51,8 +51,8 @@ public partial class CollisionHandler : Node2D
 			}
 		}
 		bool eatPressed = Input.IsActionJustPressed("eat");
-		
 		Area2D eatradius = GetNode<Area2D>("EatRadius");
+        
 		if (eatPressed)
 		{
 			foreach (Node body in eatradius.GetOverlappingBodies())
