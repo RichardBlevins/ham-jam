@@ -6,15 +6,10 @@
 [ext_resource type="AudioStream" uid="uid://dv06n2uxgjuiu" path="res://Sounds/freesound_community-pig-grunt-100272.mp3" id="4_hj1c0"]
 [ext_resource type="AudioStream" uid="uid://cxhvkn6xufe22" path="res://Sounds/freesound_community-pig-sound-47168.mp3" id="5_x44r4"]
 [ext_resource type="AudioStream" uid="uid://cxyqf2yguwhuq" path="res://Sounds/freesound_community-pig-squeak-47166.mp3" id="6_761t5"]
+[ext_resource type="Script" uid="uid://55424syv3gkn" path="res://Entities/Player/CollisionHandler.cs" id="7_hj1c0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2ndj"]
 size = Vector2(12, 6)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_vweq0"]
-radius = 85.2115
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ww0jn"]
-radius = 13.0
 
 [sub_resource type="Animation" id="Animation_1des2"]
 resource_name = "Idle"
@@ -31,7 +26,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.0333331, 2.0333333),
 "transitions": PackedFloat32Array(0.5, 2, 0.5),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1.12, 1.1), Vector2(1, 1)]
+"values": [Vector2(1, 1), Vector2(1.12, 1.12), Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_ww0jn"]
@@ -121,6 +116,12 @@ _data = {
 &"Walk": SubResource("Animation_vweq0")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vweq0"]
+radius = 85.2115
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ww0jn"]
+radius = 13.0
+
 [node name="Player" type="CharacterBody2D" unique_id=735846894]
 z_index = 1
 script = ExtResource("1_3qydi")
@@ -133,44 +134,43 @@ shape = SubResource("RectangleShape2D_l2ndj")
 scale = Vector2(1, 1.1)
 texture = ExtResource("2_q3lat")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=2099997409]
-position = Vector2(1, 0)
-zoom = Vector2(6, 6)
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-
-[node name="Hitbox" type="Area2D" parent="." unique_id=1536566132]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=395613474]
-visible = false
-position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_l2ndj")
-
-[node name="OinkRadius" type="Area2D" parent="." unique_id=970781390]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OinkRadius" unique_id=558583108]
-visible = false
-shape = SubResource("CircleShape2D_vweq0")
-
-[node name="EatRadius" type="Area2D" parent="." unique_id=1478867116]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EatRadius" unique_id=875510276]
-visible = false
-shape = SubResource("CircleShape2D_ww0jn")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1021375489]
 libraries/ = SubResource("AnimationLibrary_1des2")
 
-[node name="Bite" type="AudioStreamPlayer2D" parent="." unique_id=1515697232]
+[node name="SoundEffects" type="Node2D" parent="." unique_id=470717929]
+
+[node name="Bite" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=1515697232]
 stream = ExtResource("3_t38ms")
 volume_db = 10.0
 pitch_scale = 0.8
 
-[node name="Oink" type="AudioStreamPlayer2D" parent="." unique_id=536357287]
+[node name="Oink" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=536357287 groups=["oinks"]]
 stream = ExtResource("4_hj1c0")
 
-[node name="Oink2" type="AudioStreamPlayer2D" parent="." unique_id=1012435137]
+[node name="Oink2" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=1012435137 groups=["oinks"]]
 stream = ExtResource("5_x44r4")
 
-[node name="Oink3" type="AudioStreamPlayer2D" parent="." unique_id=669118588]
+[node name="Oink3" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=669118588 groups=["oinks"]]
 stream = ExtResource("6_761t5")
+
+[node name="CollisionHandler" type="Node2D" parent="." unique_id=464916267]
+script = ExtResource("7_hj1c0")
+
+[node name="Hitbox" type="Area2D" parent="CollisionHandler" unique_id=1536566132]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionHandler/Hitbox" unique_id=395613474]
+visible = false
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_l2ndj")
+
+[node name="OinkRadius" type="Area2D" parent="CollisionHandler" unique_id=970781390]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionHandler/OinkRadius" unique_id=558583108]
+visible = false
+shape = SubResource("CircleShape2D_vweq0")
+
+[node name="EatRadius" type="Area2D" parent="CollisionHandler" unique_id=1478867116]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionHandler/EatRadius" unique_id=875510276]
+visible = false
+shape = SubResource("CircleShape2D_ww0jn")

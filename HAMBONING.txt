@@ -30,3 +30,8 @@ make child ai
 make proceedural generation??? <<<<<<
 
 make this more of a dungeon crawler game proveedural generated rooms
+
+
+world signal
+
+when room area enters players hitbox emit signal connected to the world to move the cameras location
