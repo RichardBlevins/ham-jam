@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://b6pyhdnxq6cnk"]
 
+[ext_resource type="Script" uid="uid://b52qqjsqqmkdj" path="res://World/Rooms/Room0.cs" id="1_bxahf"]
 [ext_resource type="Texture2D" uid="uid://dymwvckqscj5x" path="res://SpriteSheets/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="1_dnaid"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mlekv"]
@@ -143,6 +144,7 @@ size = Vector2(16, 8)
 size = Vector2(8, 16)
 
 [node name="room0" type="Area2D" unique_id=875123357 groups=["NRoom"]]
+script = ExtResource("1_bxahf")
 
 [node name="Floors-Walls" type="TileMapLayer" parent="." unique_id=1612511137]
 z_index = -5
@@ -153,27 +155,29 @@ tile_set = SubResource("TileSet_il6x7")
 position = Vector2(152, 103)
 shape = SubResource("RectangleShape2D_y6flb")
 
-[node name="+Y_Connector" type="Area2D" parent="." unique_id=917958853]
+[node name="Connectors" type="Node2D" parent="." unique_id=449764813]
+
+[node name="+Y_Connector" type="Area2D" parent="Connectors" unique_id=917958853]
 position = Vector2(152, -8)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="+Y_Connector" unique_id=309300089]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/+Y_Connector" unique_id=309300089]
 shape = SubResource("RectangleShape2D_dnaid")
 
-[node name="+X_Connector" type="Area2D" parent="." unique_id=1775589379]
+[node name="+X_Connector" type="Area2D" parent="Connectors" unique_id=1775589379]
 position = Vector2(312, 104)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="+X_Connector" unique_id=15191345]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/+X_Connector" unique_id=15191345]
 shape = SubResource("RectangleShape2D_bxahf")
 
-[node name="-X_Connector" type="Area2D" parent="." unique_id=454216544]
+[node name="-X_Connector" type="Area2D" parent="Connectors" unique_id=454216544]
 position = Vector2(312, 104)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="-X_Connector" unique_id=58522514]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/-X_Connector" unique_id=58522514]
 position = Vector2(-320, 0)
 shape = SubResource("RectangleShape2D_bxahf")
 
-[node name="-Y_Connector" type="Area2D" parent="." unique_id=324959000]
+[node name="-Y_Connector" type="Area2D" parent="Connectors" unique_id=324959000]
 position = Vector2(152, 216)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="-Y_Connector" unique_id=1877742928]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/-Y_Connector" unique_id=1877742928]
 shape = SubResource("RectangleShape2D_dnaid")

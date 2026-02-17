@@ -18,8 +18,6 @@ public partial class Player : CharacterBody2D
 	[Export] public float Speed;
 	public float WalkingSpeed = 75.0f;
 	public float EatingSpeed = 45.0f;
-
-	
 	private AnimationPlayer _animationPLayer;
 	private Sprite2D _joshua;
 	private int facingDirection = 1; // 1 for right, -1 for left
@@ -39,6 +37,7 @@ public partial class Player : CharacterBody2D
 		Vector2 velocity = Vector2.Zero;
 		// Get the input direction for top-down movement
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+
 		if (direction != Vector2.Zero) // checks if the players velocity is not zero and moves the player if true
 		{
 
