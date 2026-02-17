@@ -20,7 +20,7 @@ public partial class Player : CharacterBody2D
 	public float EatingSpeed = 45.0f;
 	private AnimationPlayer _animationPLayer;
 	private Sprite2D _joshua;
-	private int facingDirection = 1; // 1 for right, -1 for left
+	private int facingDirection = 0; // 1 for right, -1 for left
 
 
 	public override void _Ready()
@@ -76,9 +76,10 @@ public partial class Player : CharacterBody2D
 			
 			case PlayerState.WALKING:
 				Speed = WalkingSpeed;
-				if (facingDirection == -1) {
-					_animationPLayer.PlayBackwards("Walk");
-				} else {_animationPLayer.Play("Walk");}
+				if (facingDirection == 1) {
+					_animationPLayer.Play("Walk");
+				}else {_animationPLayer.Play("Walk");}
+				
 					
 				break;
 
