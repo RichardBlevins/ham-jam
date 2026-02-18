@@ -1,18 +1,16 @@
 using Godot;
-using System;
 using System.Threading.Tasks;
 
 public partial class Manager : Node
 {
 	public static Manager Instance { get; private set; }
 	
-	
+	public int MaxRooms;
+	public int Rooms;
 
 	public override void _Ready()
 	{
 		Instance = this;
-		var Manager = GetNode<Manager>("/root/Manager");
-		int maxRooms;
 	}
 	
 	public async Task Wait(float waitTime)
