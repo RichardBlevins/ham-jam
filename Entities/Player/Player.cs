@@ -53,8 +53,10 @@ public partial class Player : CharacterBody2D
 				_joshua.FlipH = true; // Facing left (flipped)
 			}
 			// ================================================== MIGHT WANNA MOVE TO A SPERATE FILE
-
-			currentState = PlayerState.WALKING;
+			if (currentState != PlayerState.EATING)
+			{
+				currentState = PlayerState.WALKING;
+			}
 			velocity = direction.Normalized() * Speed;
 		} else {currentState = PlayerState.IDLE;}
 		

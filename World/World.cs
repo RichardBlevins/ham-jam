@@ -14,6 +14,8 @@ public partial class World : Node2D
 
         // Connect the signal
         player.OnNormalRoomEntered += OnNormalRoomEntered;
+
+        
     }
 
     // This method will be called whenever the signal is emitted

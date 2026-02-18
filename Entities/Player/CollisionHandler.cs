@@ -1,8 +1,5 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Runtime.InteropServices;
 
 public partial class CollisionHandler : Node2D
 {
@@ -114,7 +111,7 @@ public partial class CollisionHandler : Node2D
         int index = _rng.RandiRange(0, _oinks.Count - 1);
 
         var oink = _oinks[index];
-        oink.PitchScale = _rng.RandfRange(0.8f, 1.2f);
+        oink.PitchScale = _rng.RandfRange(1.6f, 1.8f);
         oink.Play();
     }
 }
