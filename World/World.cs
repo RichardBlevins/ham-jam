@@ -23,13 +23,14 @@ public partial class World : Node2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        
+        // Count the rooms
+        Node2D Rooms = GetNode<Node2D>("Rooms");
+        Manager.Instance.Rooms = Rooms.GetChildCount();
+        
         if (Manager.Instance.Rooms <= Manager.Instance.MaxRooms)
         {
-            Node2D Rooms = GetNode<Node2D>("Rooms");
-            foreach (Area2D room in Rooms.GetChildren())
-            {
-                GD.Print(room);
-            }
+            
         }
     }
 

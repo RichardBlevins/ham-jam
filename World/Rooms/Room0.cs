@@ -12,7 +12,9 @@ public partial class Room0 : Area2D
        		{
            		GD.Print($"Found connector: {connector.Name}");
        		}
-   		}
+   		}  // gets all connectors
+
+		Manager.Instance.Rooms += 1;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
