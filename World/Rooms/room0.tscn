@@ -135,13 +135,13 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_mlekv")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y6flb"]
-size = Vector2(302, 206)
+size = Vector2(302, 205)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dnaid"]
-size = Vector2(16, 8)
+size = Vector2(16, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxahf"]
-size = Vector2(8, 16)
+size = Vector2(1.75, 16)
 
 [node name="room0" type="Area2D" unique_id=875123357 groups=["NRoom"]]
 script = ExtResource("1_bxahf")
@@ -152,7 +152,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAAAAAIAAAAAAAI
 tile_set = SubResource("TileSet_il6x7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1485640062]
-position = Vector2(152, 103)
+position = Vector2(152, 103.5)
 shape = SubResource("RectangleShape2D_y6flb")
 
 [node name="Connectors" type="Node2D" parent="." unique_id=449764813]
@@ -161,23 +161,26 @@ shape = SubResource("RectangleShape2D_y6flb")
 position = Vector2(152, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/+Y_Connector" unique_id=309300089]
+position = Vector2(0, 7)
 shape = SubResource("RectangleShape2D_dnaid")
 
 [node name="+X_Connector" type="Area2D" parent="Connectors" unique_id=1775589379]
 position = Vector2(312, 104)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/+X_Connector" unique_id=15191345]
+position = Vector2(-7, 0)
 shape = SubResource("RectangleShape2D_bxahf")
 
 [node name="-X_Connector" type="Area2D" parent="Connectors" unique_id=454216544]
 position = Vector2(312, 104)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/-X_Connector" unique_id=58522514]
-position = Vector2(-320, 0)
+position = Vector2(-313.125, 0)
 shape = SubResource("RectangleShape2D_bxahf")
 
 [node name="-Y_Connector" type="Area2D" parent="Connectors" unique_id=324959000]
 position = Vector2(152, 216)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Connectors/-Y_Connector" unique_id=1877742928]
+position = Vector2(0, -7)
 shape = SubResource("RectangleShape2D_dnaid")
