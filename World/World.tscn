@@ -2,14 +2,12 @@
 
 [ext_resource type="Script" uid="uid://clnneut6e2ytc" path="res://World/World.cs" id="1_mlekv"]
 [ext_resource type="PackedScene" uid="uid://cdiabwj15iuwq" path="res://Entities/Player/Player.tscn" id="1_y6flb"]
-[ext_resource type="PackedScene" uid="uid://dx4etwqw2sq0i" path="res://Entities/Child/Child.tscn" id="2_mlekv"]
 [ext_resource type="PackedScene" uid="uid://bpiwvynl2270o" path="res://World/Rooms/room1.tscn" id="3_o14yy"]
 [ext_resource type="PackedScene" uid="uid://b6pyhdnxq6cnk" path="res://World/Rooms/room0.tscn" id="4_il6x7"]
 
 [node name="World" type="Node2D" unique_id=62717158]
 script = ExtResource("1_mlekv")
-MaxRooms = 8
-MaxActiveRooms = 4
+MaxRooms = 10
 RoomScenes = [ExtResource("4_il6x7"), ExtResource("3_o14yy")]
 RoomWeights = PackedInt32Array(10, 100)
 RoomMaxCounts = PackedInt32Array(-1, 1)
@@ -22,10 +20,4 @@ position = Vector2(137, 90)
 anchor_mode = 0
 zoom = Vector2(6.32, 5.2)
 
-[node name="Child" parent="." unique_id=403796794 instance=ExtResource("2_mlekv")]
-position = Vector2(181, 54)
-
 [node name="Rooms" type="Node2D" parent="." unique_id=1153403481]
-
-[node name="Camera2D2" type="Camera2D" parent="." unique_id=1672246096]
-zoom = Vector2(0.5, 0.5)

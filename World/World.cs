@@ -18,6 +18,16 @@ public partial class World : Node2D
     [ExportGroup("Doorway Closure Settings")]
     [Export] public int HorizontalDoorwayTileCount = 3;
     [Export] public int VerticalDoorwayTileCount = 5;
+    [Export] public Vector2I HorizontalLeftTile = new Vector2I(1, 0);
+    [Export] public Vector2I HorizontalRightTile = new Vector2I(2, 0);
+    [Export] public Vector2I HorizontalLeftTileTop = new Vector2I(1, 4);
+    [Export] public Vector2I HorizontalRightTileTop = new Vector2I(3, 4);
+    [Export] public Vector2I VerticalTopTile = new Vector2I(5, 3);
+    [Export] public Vector2I VerticalMidTile = new Vector2I(5, 1);
+    [Export] public Vector2I VerticalBottomTile = new Vector2I(5, 2);
+    [Export] public Vector2I VerticalLeftTopTile = new Vector2I(0, 0);
+    [Export] public Vector2I VerticalLeftMidTile = new Vector2I(0, 1);
+    [Export] public Vector2I VerticalLeftBottomTile = new Vector2I(0, 2);
     
     private Camera2D camera2D;
     private RandomNumberGenerator _rng = new RandomNumberGenerator();
@@ -33,6 +43,8 @@ public partial class World : Node2D
 
     public override void _Ready()
     {
+        _rng.Randomize();
+        
         camera2D = GetNode<Camera2D>("Camera2D");
         Player player = GetNode<Player>("Player");
         player.OnNormalRoomEntered += OnNormalRoomEntered;
@@ -62,7 +74,7 @@ public partial class World : Node2D
             roomSpawnCounts[i] = 0;
         }
         
-        // Always spawn room0 as the first room
+        // Always spawn 'room0' as the first room
         SpawnRoom(new Vector2(0, 0), null, 0);
     }
     
@@ -155,13 +167,17 @@ public partial class World : Node2D
     
     private int PickWeightedRandom(List<(int index, int weight)> availableRooms)
     {
+        if (availableRooms.Count == 0)
+        {
+            return -1;
+        }
+        
         int totalWeight = 0;
         foreach (var (_, weight) in availableRooms)
         {
             totalWeight += weight;
         }
         
-        _rng.Randomize();
         int randomValue = _rng.RandiRange(0, totalWeight - 1);
         
         int currentWeight = 0;
@@ -210,17 +226,31 @@ public partial class World : Node2D
         string connectorName = fromConnector.Name;
         string oppositeConnectorName = GetOppositeConnectorName(connectorName);
         
-        Node2D newConnectors = newRoom.GetNode<Node2D>("Connectors");
-        Area2D oppositeConnector = newConnectors.GetNode<Area2D>(oppositeConnectorName);
-        
-        if (oppositeConnector == null)
+        Node2D newConnectors = newRoom.GetNodeOrNull<Node2D>("Connectors");
+        if (newConnectors == null)
         {
-            GD.PrintErr($"Could not find connector: {oppositeConnectorName}");
+            GD.PrintErr($"Room missing Connectors node!");
+            newRoom.GlobalPosition = position;
             return;
         }
         
-        CollisionShape2D fromShape = fromConnector.GetNode<CollisionShape2D>("CollisionShape2D");
-        CollisionShape2D toShape = oppositeConnector.GetNode<CollisionShape2D>("CollisionShape2D");
+        Area2D oppositeConnector = newConnectors.GetNodeOrNull<Area2D>(oppositeConnectorName);
+        if (oppositeConnector == null)
+        {
+            GD.PrintErr($"Could not find connector: {oppositeConnectorName}");
+            newRoom.GlobalPosition = position;
+            return;
+        }
+        
+        CollisionShape2D fromShape = fromConnector.GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
+        CollisionShape2D toShape = oppositeConnector.GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
+        
+        if (fromShape == null || toShape == null)
+        {
+            GD.PrintErr("Connector missing CollisionShape2D!");
+            newRoom.GlobalPosition = position;
+            return;
+        }
         
         Vector2 fromShapeGlobal = fromConnector.GlobalPosition + fromShape.Position;
         Vector2 toShapeLocal = oppositeConnector.Position + toShape.Position;
@@ -274,7 +304,9 @@ public partial class World : Node2D
         for (int i = 0; i < activeRooms.Count; i++)
         {
             Area2D room = activeRooms[i];
-            Node2D connectors = room.GetNode<Node2D>("Connectors");
+            Node2D connectors = room.GetNodeOrNull<Node2D>("Connectors");
+            
+            if (connectors == null) continue;
             
             foreach (Node child in connectors.GetChildren())
             {
@@ -296,7 +328,9 @@ public partial class World : Node2D
         
         foreach (Area2D room in activeRooms)
         {
-            Node2D connectors = room.GetNode<Node2D>("Connectors");
+            Node2D connectors = room.GetNodeOrNull<Node2D>("Connectors");
+            
+            if (connectors == null) continue;
             
             foreach (Node child in connectors.GetChildren())
             {
@@ -309,7 +343,6 @@ public partial class World : Node2D
         
         if (allConnectors.Count > 0)
         {
-            _rng.Randomize();
             int randomIndex = _rng.RandiRange(0, allConnectors.Count - 1);
             Area2D forcedConnector = allConnectors[randomIndex];
             
@@ -319,13 +352,17 @@ public partial class World : Node2D
     
     private Area2D PickWeightedConnector(List<(Area2D connector, int roomIndex)> connectors)
     {
+        if (connectors.Count == 0)
+        {
+            return null;
+        }
+        
         int totalWeight = 0;
         foreach (var (_, roomIndex) in connectors)
         {
             totalWeight += roomIndex + 1;
         }
         
-        _rng.Randomize();
         int randomWeight = _rng.RandiRange(0, totalWeight - 1);
         
         int currentWeight = 0;
@@ -338,7 +375,7 @@ public partial class World : Node2D
             }
         }
         
-        return null;
+        return connectors[0].connector;
     }
     
     private void CloseAllOpenConnectors()
@@ -347,8 +384,12 @@ public partial class World : Node2D
         
         foreach (Area2D room in allRooms)
         {
-            Node2D connectors = room.GetNode<Node2D>("Connectors");
-            TileMapLayer tileMap = room.GetNode<TileMapLayer>("Floors-Walls");
+            if (!IsInstanceValid(room)) continue;
+            
+            Node2D connectors = room.GetNodeOrNull<Node2D>("Connectors");
+            TileMapLayer tileMap = room.GetNodeOrNull<TileMapLayer>("Floors-Walls");
+            
+            if (connectors == null || tileMap == null) continue;
             
             foreach (Node child in connectors.GetChildren())
             {
@@ -370,19 +411,19 @@ public partial class World : Node2D
         
         if (connectorName.Contains("+Y"))
         {
-            CloseHorizontalDoorway(tileMap, baseTilePos, new Vector2I(0, 1), new Vector2I(1, 0), new Vector2I(2, 0));
+            CloseHorizontalDoorway(tileMap, baseTilePos, new Vector2I(0, 1), HorizontalLeftTile, HorizontalRightTile);
         }
         else if (connectorName.Contains("-Y"))
         {
-            CloseHorizontalDoorway(tileMap, baseTilePos, new Vector2I(0, -1), new Vector2I(1, 4), new Vector2I(3, 4));
+            CloseHorizontalDoorway(tileMap, baseTilePos, new Vector2I(0, -1), HorizontalLeftTileTop, HorizontalRightTileTop);
         }
         else if (connectorName.Contains("+X"))
         {
-            CloseVerticalDoorway(tileMap, baseTilePos, new Vector2I(-1, 0), new Vector2I(5, 3), new Vector2I(5, 1), new Vector2I(5, 2));
+            CloseVerticalDoorway(tileMap, baseTilePos, new Vector2I(-1, 0), VerticalTopTile, VerticalMidTile, VerticalBottomTile);
         }
         else if (connectorName.Contains("-X"))
         {
-            CloseVerticalDoorway(tileMap, baseTilePos, new Vector2I(1, 0), new Vector2I(0, 0), new Vector2I(0, 1), new Vector2I(0, 2));
+            CloseVerticalDoorway(tileMap, baseTilePos, new Vector2I(1, 0), VerticalLeftTopTile, VerticalLeftMidTile, VerticalLeftBottomTile);
         }
     }
     
