@@ -36,32 +36,8 @@ public partial class CollisionHandler : Node2D
 		if (spaceJustPressed) //checks if that input is true then ...
 		{
 			OinkSoundEffect();
-			
-			Area2D oinkradius = GetNode<Area2D>("OinkRadius");  //get the oink radius node from the node tree
-			
-			foreach (Node2D body in oinkradius.GetOverlappingBodies()) // checks for any 2d nodes in the oinkradius
-			{
-				if (body is RigidBody2D rigidBody && body != this && body.IsInGroup("Child")) { //checks if node2d is a rigid body type with the child group and is not the player 
-						rigidBody.EmitSignal("OnLured", GlobalPosition, 2000.0); 
-						break;
-				}
-			}
 		}
-		bool eatPressed = Input.IsActionJustPressed("eat");
-		Area2D eatradius = GetNode<Area2D>("EatRadius");
 
-		if (eatPressed)
-		{
-			foreach (Node body in eatradius.GetOverlappingBodies())
-			{
-				if (body is RigidBody2D rigidBody && body != this && body.IsInGroup("Child") && player.currentState != Player.PlayerState.EATING)
-				{
-					body.QueueFree();
-					Eating(3.0f);
-					break;
-				}
-			}	
-		}
         Area2D hitbox = GetNode<Area2D>("Hitbox");
         foreach (Area2D area in hitbox.GetOverlappingAreas()) {
             if (area.IsInGroup("NRoom")) {
@@ -80,29 +56,10 @@ public partial class CollisionHandler : Node2D
     {
         base._Process(delta);
         		//EAT COOLDOWN
-		if (eatTimer > 0)
-		{
-			eatTimer -= (float)delta;
-
-			if (eatTimer <= 0)
-			{
-				player.currentState = Player.PlayerState.WALKING;
-			}
-			else
-			{
-				player.currentState = Player.PlayerState.EATING;
-			}
-		}
         PlayerInteractionsHandler();
     }
 
 
-
-
-    	public void Eating(float duration)
-	{
-		eatTimer = duration;
-	}
     private void OinkSoundEffect()
     {
         if (_oinks.Count == 0)
@@ -111,7 +68,7 @@ public partial class CollisionHandler : Node2D
         int index = _rng.RandiRange(0, _oinks.Count - 1);
 
         var oink = _oinks[index];
-        oink.PitchScale = _rng.RandfRange(1.6f, 1.8f);
+        oink.PitchScale = _rng.RandfRange(0.1f, 1f);
         oink.Play();
     }
 }

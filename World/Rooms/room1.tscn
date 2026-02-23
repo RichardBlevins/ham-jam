@@ -248,7 +248,7 @@ size = Vector2(16, 2)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxahf"]
 size = Vector2(1.75, 16)
 
-[node name="room1" type="Area2D" unique_id=875123357 groups=["NRoom"]]
+[node name="room1" type="Area2D" unique_id=875123357 groups=["NRoom", "TRoom"]]
 
 [node name="Floors-Walls" type="TileMapLayer" parent="." unique_id=1612511137]
 z_index = -5

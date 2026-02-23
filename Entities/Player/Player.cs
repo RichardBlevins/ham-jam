@@ -9,7 +9,6 @@ public partial class Player : CharacterBody2D
 	public enum PlayerState
 	{
 		WALKING,
-		EATING,
 		IDLE
 	}
 
@@ -17,7 +16,6 @@ public partial class Player : CharacterBody2D
 
 	[Export] public float Speed;
 	public float WalkingSpeed = 75.0f;
-	public float EatingSpeed = 45.0f;
 	private AnimationPlayer _animationPLayer;
 	private Sprite2D _joshua;
 	private int facingDirection = 0; // 1 for right, -1 for left
@@ -53,10 +51,8 @@ public partial class Player : CharacterBody2D
 				_joshua.FlipH = true; // Facing left (flipped)
 			}
 			// ================================================== MIGHT WANNA MOVE TO A SPERATE FILE
-			if (currentState != PlayerState.EATING)
-			{
-				currentState = PlayerState.WALKING;
-			}
+			currentState = PlayerState.WALKING;
+			
 			velocity = direction.Normalized() * Speed;
 		} else {currentState = PlayerState.IDLE;}
 		
@@ -71,18 +67,13 @@ public partial class Player : CharacterBody2D
 	private void StateMachine()
 	{
 		switch (currentState)
-		{
-			case PlayerState.EATING:
-				Speed = EatingSpeed;
-				break;
-			
+		{		
 			case PlayerState.WALKING:
 				Speed = WalkingSpeed;
 				if (facingDirection == 1) {
 					_animationPLayer.Play("Walk");
 				}else {_animationPLayer.Play("Walk");}
 				
-					
 				break;
 
 			case PlayerState.IDLE:
