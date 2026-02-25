@@ -5,8 +5,6 @@ public partial class CollisionHandler : Node2D
 {
     private AnimationPlayer _animationPlayer;
     private Sprite2D _joshua;
-    private List<AudioStreamPlayer2D> _oinks;
-	private RandomNumberGenerator _rng = new RandomNumberGenerator();
     private Player player;
     
     public override void _Ready()
@@ -14,35 +12,11 @@ public partial class CollisionHandler : Node2D
         base._Ready();
 
         player = GetParent<Player>();
-
-		//Move
-		_rng.Randomize();
-
-		_oinks = new List<AudioStreamPlayer2D>();
-
-        foreach (Node node in GetTree().GetNodesInGroup("Oinks"))
-        {
-            if (node is AudioStreamPlayer2D audio)
-            {
-                _oinks.Add(audio);
-            }
-        }
-		//Move
+        
     }
 
-    public void PlayerInteractionsHandler()
+    public void PlayerCollisionHandler()
 	{
-		//Move
-		bool spaceJustPressed = Input.IsActionJustPressed("ui_accept"); // creates a boolean var on the player spaceinput
-
-		if (spaceJustPressed) //checks if that input is true then ...
-		{
-			OinkSoundEffect();
-
-		}
-		// Move
-
-
 		//camera movment 
         Area2D hitbox = GetNode<Area2D>("Hitbox");
         foreach (Area2D area in hitbox.GetOverlappingAreas()) {
@@ -55,26 +29,9 @@ public partial class CollisionHandler : Node2D
 
 	}
 
-
-
-
     public override void _Process(double delta)
     {
         base._Process(delta);
-		//Move
-        PlayerInteractionsHandler();
+        PlayerCollisionHandler();
     }
-
-    private void OinkSoundEffect()
-    {
-        if (_oinks.Count == 0)
-            return;
-
-        int index = _rng.RandiRange(0, _oinks.Count - 1);
-
-        var oink = _oinks[index];
-        oink.PitchScale = _rng.RandfRange(1.6f, 1.8f);
-        oink.Play();
-    }
-	//Move
 }
