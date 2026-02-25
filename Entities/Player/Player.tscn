@@ -174,3 +174,5 @@ shape = SubResource("CircleShape2D_vweq0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionHandler/EatRadius" unique_id=875510276]
 visible = false
 shape = SubResource("CircleShape2D_ww0jn")
+
+[node name="Oink" type="Node2D" parent="." unique_id=2112084741]
