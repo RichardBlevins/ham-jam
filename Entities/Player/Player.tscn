@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://cxyqf2yguwhuq" path="res://Sounds/freesound_community-pig-squeak-47166.mp3" id="6_761t5"]
 [ext_resource type="Script" uid="uid://55424syv3gkn" path="res://Entities/Player/CollisionHandler.cs" id="7_hj1c0"]
 [ext_resource type="Script" uid="uid://bndega48bck1x" path="res://Entities/Player/InputHandlers.cs" id="8_x44r4"]
+[ext_resource type="PackedScene" uid="uid://cqnm68hc54tse" path="res://Entities/Player/Projectiles/Oink_Projectile.tscn" id="9_761t5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2ndj"]
 size = Vector2(12, 6)
@@ -178,3 +179,4 @@ shape = SubResource("CircleShape2D_ww0jn")
 
 [node name="InputHandler" type="Node2D" parent="." unique_id=403070304]
 script = ExtResource("8_x44r4")
+Oink_Projectile = ExtResource("9_761t5")

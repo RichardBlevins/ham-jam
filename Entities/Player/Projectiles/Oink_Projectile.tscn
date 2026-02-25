@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://cqnm68hc54tse"]
 
+[ext_resource type="Texture2D" uid="uid://dy8kkf2jkpnm4" path="res://Entities/Sprites/Ham.png" id="1_k2lkl"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_0bii2"]
 
 [node name="OinkProjectile" type="Area2D" unique_id=1725405333]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=39453376]
 shape = SubResource("CircleShape2D_0bii2")
+
+[node name="Ham" type="Sprite2D" parent="." unique_id=1681176861]
+position = Vector2(0, -5.9604645e-08)
+scale = Vector2(0.5234375, 0.46875003)
+texture = ExtResource("1_k2lkl")

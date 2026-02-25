@@ -4,12 +4,17 @@ using System.Collections.Generic;
 
 public partial class InputHandlers : Node2D
 {
+    [Export]
+    public PackedScene Oink_Projectile;
     private List<AudioStreamPlayer2D> _oinks;
     private RandomNumberGenerator _rng = new RandomNumberGenerator();
+    private Player player;
     public override void _Ready()
     {
         base._Ready();
         
+        player = GetParent<Player>();
+
         _rng.Randomize();
 
 		_oinks = new List<AudioStreamPlayer2D>();
@@ -31,9 +36,10 @@ public partial class InputHandlers : Node2D
     public void InputHandler() {
 
         bool spaceJustPressed = Input.IsActionJustPressed("ui_accept"); // creates a boolean var on the player spaceinput
-
 		if (spaceJustPressed) //checks if that input is true then ...
 		{
+            Area2D Projectile = Oink_Projectile.Instantiate<Area2D>();
+            AddChild(Projectile);
 			OinkSoundEffect();
 
 		}
