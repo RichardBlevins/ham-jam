@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dy8kkf2jkpnm4" path="res://Entities/Sprites/Ham.png" id="1_k2lkl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0bii2"]
+radius = 8.0
 
 [node name="OinkProjectile" type="Area2D" unique_id=1725405333]
 
@@ -10,6 +11,6 @@
 shape = SubResource("CircleShape2D_0bii2")
 
 [node name="Ham" type="Sprite2D" parent="." unique_id=1681176861]
-position = Vector2(0, -5.9604645e-08)
-scale = Vector2(0.5234375, 0.46875003)
+position = Vector2(-3.5762787e-07, -1.66893e-06)
+scale = Vector2(0.5, 0.49999997)
 texture = ExtResource("1_k2lkl")

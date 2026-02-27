@@ -30,6 +30,7 @@ public partial class InputHandlers : Node2D
     public override void _Process(double delta)
     {
         base._Process(delta);
+        
         InputHandler();
     }
 
