@@ -179,4 +179,4 @@ shape = SubResource("CircleShape2D_ww0jn")
 
 [node name="InputHandler" type="Node2D" parent="." unique_id=403070304]
 script = ExtResource("8_x44r4")
-Oink_Projectile = ExtResource("9_761t5")
+ProjectileScene = ExtResource("9_761t5")

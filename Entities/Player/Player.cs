@@ -34,7 +34,7 @@ public partial class Player : CharacterBody2D
 	{
 		Vector2 velocity = Vector2.Zero;
 		// Get the input direction for top-down movement
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		Vector2 direction = Input.GetVector("left", "right", "up", "down");
 
 		if (direction != Vector2.Zero) // checks if the players velocity is not zero and moves the player if true
 		{
