@@ -3,7 +3,7 @@ using System;
 
 public partial class OinkProjectile : Area2D
 {
-    [Export] public float Speed = 600f;
+    [Export] public float Speed = 200f;
 
     private Vector2 _direction = Vector2.Right;
 
@@ -21,4 +21,9 @@ public partial class OinkProjectile : Area2D
     {
         QueueFree(); // destroy on hit
     }
+	private void _on_screen_exited()
+	{
+		QueueFree();
+		GD.Print("exited");
+	}
 }

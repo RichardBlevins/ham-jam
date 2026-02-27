@@ -1,6 +1,8 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 public partial class InputHandlers : Node2D
 {
@@ -8,9 +10,12 @@ public partial class InputHandlers : Node2D
     private List<AudioStreamPlayer2D> _oinks;
     private RandomNumberGenerator _rng = new RandomNumberGenerator();
     private Player player;
+    private bool ShootCooldown;
     public override void _Ready()
     {
         base._Ready();
+
+        ShootCooldown = true;
         
         player = GetParent<Player>();
 
@@ -32,11 +37,11 @@ public partial class InputHandlers : Node2D
         InputHandler();
     }
 
-    public void InputHandler() {
+    public async Task InputHandler() {
         Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         if (direction != Vector2.Zero)
         {
-            Shoot(direction);
+            await Shoot(direction);
         }
 		OinkSoundEffect();
 
@@ -54,12 +59,19 @@ public partial class InputHandlers : Node2D
         oink.Play();
     }
     
-    private void Shoot(Vector2 GetDirection)
+    private async Task Shoot(Vector2 GetDirection)
     {
-        OinkProjectile projectile = ProjectileScene.Instantiate<OinkProjectile>();
-        projectile.GlobalPosition = GlobalPosition;
-        projectile.SetDirection(GetDirection);
-
-        GetTree().CurrentScene.AddChild(projectile);
+        if (ShootCooldown != false)
+        {
+            
+            
+            ShootCooldown = false;
+            OinkProjectile projectile = ProjectileScene.Instantiate<OinkProjectile>();
+            projectile.GlobalPosition = GlobalPosition;
+            projectile.SetDirection(GetDirection);
+            GetTree().CurrentScene.AddChild(projectile);
+            await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
+            ShootCooldown = true; 
+        }
     }
 }
