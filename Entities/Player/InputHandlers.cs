@@ -40,7 +40,8 @@ public partial class InputHandlers : Node2D
 		if (spaceJustPressed) //checks if that input is true then ...
 		{
             Area2D Projectile = Oink_Projectile.Instantiate<Area2D>();
-            AddChild(Projectile);
+            Projectile.GlobalPosition = GlobalPosition;
+            GetTree().CurrentScene.AddChild(Projectile);
 			OinkSoundEffect();
 
 		}
