@@ -1,7 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Threading.Tasks;
 
 public partial class InputHandlers : Node2D
@@ -70,7 +69,7 @@ public partial class InputHandlers : Node2D
             projectile.GlobalPosition = GlobalPosition;
             projectile.SetDirection(GetDirection);
             GetTree().CurrentScene.AddChild(projectile);
-            await ToSignal(GetTree().CreateTimer(0.5), SceneTreeTimer.SignalName.Timeout);
+            await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout);
             ShootCooldown = true; 
         }
     }
