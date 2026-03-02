@@ -40,9 +40,8 @@ public partial class InputHandlers : Node2D
         Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
         if (direction != Vector2.Zero)
         {
-            await Shoot(direction);
+            Shoot(direction);
         }
-		OinkSoundEffect();
 
     }
 
@@ -69,7 +68,8 @@ public partial class InputHandlers : Node2D
             projectile.GlobalPosition = GlobalPosition;
             projectile.SetDirection(GetDirection);
             GetTree().CurrentScene.AddChild(projectile);
-            await ToSignal(GetTree().CreateTimer(0.1), SceneTreeTimer.SignalName.Timeout);
+            OinkSoundEffect();
+            await ToSignal(GetTree().CreateTimer(0.3), SceneTreeTimer.SignalName.Timeout);
             ShootCooldown = true; 
         }
     }

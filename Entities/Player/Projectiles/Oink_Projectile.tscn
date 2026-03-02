@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_0bii2"]
 radius = 5.0
 
-[node name="OinkProjectile" type="Area2D" unique_id=1725405333]
+[node name="OinkProjectile" type="Area2D" unique_id=1725405333 groups=["PlayerProjectile"]]
 script = ExtResource("1_ubqyx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=39453376]
@@ -14,6 +14,7 @@ position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_0bii2")
 
 [node name="Ham" type="Sprite2D" parent="." unique_id=1681176861]
+position = Vector2(0, -1)
 scale = Vector2(0.25, 0.24999999)
 texture = ExtResource("1_k2lkl")
 

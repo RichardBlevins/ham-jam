@@ -1,4 +1,4 @@
 TODO:
-	oink projectile
-	Give player a shoot method/ oink to damage enemies
-	create enimes
+	add health to player
+	add a blood meter to shoot blood clots
+	make robot

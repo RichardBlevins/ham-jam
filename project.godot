@@ -35,6 +35,7 @@ NRoom=""
 Oinks=""
 ERoom=""
 TRoom=""
+PlayerProjectile=""
 
 [input]
 

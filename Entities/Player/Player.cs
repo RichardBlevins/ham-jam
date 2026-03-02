@@ -9,23 +9,26 @@ public partial class Player : CharacterBody2D
 	public enum PlayerState
 	{
 		WALKING,
-		IDLE
+		IDLE,
+		DEAD
 	}
 
 	public PlayerState currentState = PlayerState.IDLE;
 
-	[Export] public float Speed;
-	public float WalkingSpeed = 75.0f;
+	public float Speed;
+	[Export] public float WalkingSpeed = 75.0f;
+	[Export] public float MaxHealth = 100.0f;
+	[Export] public float Health = 100.0f;
+	[Export] public float Defence = 0.0f;
+
 	private AnimationPlayer _animationPLayer;
 	private Sprite2D _joshua;
-	private int facingDirection = 0; // 1 for right, -1 for left
+	private int facingDirection = 0;
 
 
 	public override void _Ready()
 	{
 		base._Ready();
-
-		// ================================================== MIGHT WANNA MOVE TO A SPERATE FILE
 		_animationPLayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_joshua = GetNode<Sprite2D>("Joshua"); // Adjust path if needed
 	}
@@ -33,13 +36,11 @@ public partial class Player : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Vector2.Zero;
-		// Get the input direction for top-down movement
 		Vector2 direction = Input.GetVector("left", "right", "up", "down");
 
-		if (direction != Vector2.Zero) // checks if the players velocity is not zero and moves the player if true
+		if (direction != Vector2.Zero)
 		{
 
-			// ================================================== MIGHT WANNA MOVE TO A SPERATE FILE
 			if (direction.X < 0 && facingDirection != 1)
 			{
 				facingDirection = 1;
@@ -50,12 +51,18 @@ public partial class Player : CharacterBody2D
 				facingDirection = -1;
 				_joshua.FlipH = true; // Facing left (flipped)
 			}
-			// ================================================== MIGHT WANNA MOVE TO A SPERATE FILE
+			
+
+
 			currentState = PlayerState.WALKING;
 			
 			velocity = direction.Normalized() * Speed;
 		} else {currentState = PlayerState.IDLE;}
 		
+		if (Health < 0.1)
+		{
+			currentState = PlayerState.DEAD;
+		}
 
 		Velocity = velocity;
 
@@ -79,6 +86,10 @@ public partial class Player : CharacterBody2D
 			case PlayerState.IDLE:
 				Speed = WalkingSpeed;
 				_animationPLayer.Play("Idle");
+				break;
+
+			case PlayerState.DEAD:
+
 				break;
 		}
 	}
