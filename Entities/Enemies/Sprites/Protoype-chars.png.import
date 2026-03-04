@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://5604ydgpp2ib"
-path="res://.godot/imported/Protoype-chars.png-64855cb0a9af6b144faeee64fc5a2438.ctex"
+path="res://.godot/imported/Protoype-chars.png-f2c7252265eda7107ac02c0dca30bf3f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Sprites/Protoype-chars.png"
-dest_files=["res://.godot/imported/Protoype-chars.png-64855cb0a9af6b144faeee64fc5a2438.ctex"]
+source_file="res://Entities/Enemies/Sprites/Protoype-chars.png"
+dest_files=["res://.godot/imported/Protoype-chars.png-f2c7252265eda7107ac02c0dca30bf3f.ctex"]
 
 [params]
 

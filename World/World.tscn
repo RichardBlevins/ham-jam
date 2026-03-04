@@ -8,6 +8,7 @@
 [node name="World" type="Node2D" unique_id=62717158]
 script = ExtResource("1_mlekv")
 MaxRooms = 10
+MaxActiveRooms = 3
 RoomScenes = [ExtResource("4_il6x7"), ExtResource("3_o14yy")]
 RoomWeights = PackedInt32Array(10, 100)
 RoomMaxCounts = PackedInt32Array(-1, 1)

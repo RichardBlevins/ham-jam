@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://fcf6c08hr2hn"]
+
+[ext_resource type="Texture2D" uid="uid://b7njhkcpmnq2q" path="res://Entities/Enemies/Sprites/Booger.png" id="1_d36ac"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6uli"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fu28"]
+atlas = ExtResource("1_d36ac")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lalpi"]
+atlas = ExtResource("1_d36ac")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2fny"]
+atlas = ExtResource("1_d36ac")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v7sgp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fu28")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lalpi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2fny")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 2.5
+}]
+
+[node name="Booger" type="CharacterBody2D" unique_id=199118659]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1377858620]
+shape = SubResource("RectangleShape2D_r6uli")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1590988306]
+sprite_frames = SubResource("SpriteFrames_v7sgp")
+animation = &"Walk"
+frame_progress = 0.20056102
